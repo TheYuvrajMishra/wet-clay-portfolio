@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0b0c;
+  --color-coal: #141416;
+  --color-bone: #ede8df;
+  --color-fog: #a39c90;
+  --color-kiln: #e59a4f;
+  --color-clay: #d9cfbf;
+
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, monospace;
+
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  background: var(--color-ink);
+}
+
+body {
+  @apply bg-ink text-bone font-body antialiased overflow-x-hidden;
+}
+
+::selection {
+  background: var(--color-kiln);
+  color: var(--color-ink);
+}
+
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  [data-cursor] {
+    cursor: none;
+  }
+}
+
+/* Outlined display type */
+@utility text-stroke {
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--color-bone) 80%, transparent);
+  color: transparent;
+}
+
+@utility text-stroke-kiln {
+  -webkit-text-stroke: 1.5px var(--color-kiln);
+  color: transparent;
+}
+
+/* Film grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Wireframe x-ray overlay for work cards */
+.wireframe-grid {
+  background-image:
+    linear-gradient(rgba(229, 154, 79, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 154, 79, 0.22) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2d;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-kiln);
+}
